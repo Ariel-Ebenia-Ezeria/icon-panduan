@@ -15,60 +15,61 @@ PLN ICON PLUS - Pre-Config Switch
 <div class="page-content">
     <section id="content-types">
         <div class="row">
+
             <div class="col-md-4 col-sm-12">
                 <div class="card">
-                    <div class="card-content">
-                        <img class="card-img-top img-fluid" src="/assets/compiled/png/switch.png" alt="Card image cap"
-                            style="height: 20rem" />
+                    <button type="button" class="btn btn-block" data-bs-toggle="modal" data-bs-target="#inlineForm">
                         <div class="card-body">
-                            <h4 class="card-title">BDCOM S4800</h4>
-                            <p class="card-text">
-                                Manageable switch 8Port 100/1000 Mbps, 2 SFP port 1G, 1 Console port.
-                            </p>
-                            <button type="button" class="btn btn-info block" data-bs-toggle="modal"
-                                data-bs-target="#inlineForm">
-                                Detail
-                            </button>
+                            <div class="d-flex align-items-center">
+                                <div class="avatar avatar-xl">
+                                    <img src="/assets/compiled/jpg/1.jpg" alt="Face 1">
+                                </div>
+                                <div class="ms-3 name">
+                                    <h5 class="font-bold">BDCOM</h5>
+                                    <h6 class="text-muted mb-0">S4800</h6>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </button>
                 </div>
             </div>
+
             <div class="col-md-4 col-sm-12">
                 <div class="card">
-                    <div class="card-content">
-                        <img class="card-img-top img-fluid" src="/assets/compiled/png/switch.png" alt="Card image cap"
-                            style="height: 20rem" />
+                    <button type="button" class="btn btn-block" data-bs-toggle="modal" data-bs-target="#inlineForm">
                         <div class="card-body">
-                            <h4 class="card-title">BDCOM S4800</h4>
-                            <p class="card-text">
-                                Manageable switch 8Port 100/1000 Mbps, 2 SFP port 1G, 1 Console port.
-                            </p>
-                            <button type="button" class="btn btn-info block" data-bs-toggle="modal"
-                                data-bs-target="#inlineForm">
-                                Detail
-                            </button>
+                            <div class="d-flex align-items-center">
+                                <div class="avatar avatar-xl">
+                                    <img src="/assets/compiled/jpg/1.jpg" alt="Face 1">
+                                </div>
+                                <div class="ms-3 name">
+                                    <h5 class="font-bold">BDCOM</h5>
+                                    <h6 class="text-muted mb-0">S4800</h6>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </button>
                 </div>
             </div>
+
             <div class="col-md-4 col-sm-12">
                 <div class="card">
-                    <div class="card-content">
-                        <img class="card-img-top img-fluid" src="/assets/compiled/png/switch.png" alt="Card image cap"
-                            style="height: 20rem" />
+                    <button type="button" class="btn btn-block" data-bs-toggle="modal" data-bs-target="#inlineForm">
                         <div class="card-body">
-                            <h4 class="card-title">BDCOM S4800</h4>
-                            <p class="card-text">
-                                Manageable switch 8Port 100/1000 Mbps, 2 SFP port 1G, 1 Console port.
-                            </p>
-                            <button type="button" class="btn btn-info block" data-bs-toggle="modal"
-                                data-bs-target="#inlineForm">
-                                Detail
-                            </button>
+                            <div class="d-flex align-items-center">
+                                <div class="avatar avatar-xl">
+                                    <img src="/assets/compiled/jpg/1.jpg" alt="Face 1">
+                                </div>
+                                <div class="ms-3 name">
+                                    <h5 class="font-bold">BDCOM</h5>
+                                    <h6 class="text-muted mb-0">S4800</h6>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </button>
                 </div>
             </div>
+
         </div>
 
         <!-- Detail Modal-->

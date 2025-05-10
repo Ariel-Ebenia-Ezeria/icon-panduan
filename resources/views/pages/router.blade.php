@@ -15,70 +15,63 @@ PLN ICON PLUS - Pre-Config Router
 <div class="page-content">
     <section id="content-types">
         <div class="row">
-             <div class="col-md-4 col-sm-12">
-                <div class="card">
-                    <div class="card-content">
-                        <img class="card-img-top img-fluid" src="/assets/compiled/png/router.png" alt="Card image cap"
-                            style="height: 20rem" />
-                        <div class="card-body">
-                            <h4 class="card-title">Router TP-Link Archer AX6000</h4>
-                            <p class="card-text">
-                                Router dual-band Wi-Fi 6 (802.11ax) dengan 8 port Gigabit Ethernet, 2 port USB 3.0, dan 1 port WAN Gigabit.
-                            </p>
-                        </div>
-                        <div class="card-footer d-flex justify-content-between">
-                      <button type="button" class="btn btn-info block" data-bs-toggle="modal"
-                                    data-bs-target="#detailForm">
-                                    Detail
-                                </button>
-                    </div>
-                    </div>
-                </div>
-            </div>
             <div class="col-md-4 col-sm-12">
                 <div class="card">
-                    <div class="card-content">
-                        <img class="card-img-top img-fluid" src="/assets/compiled/png/router.png" alt="Card image cap"
-                            style="height: 20rem" />
+                    <button type="button" class="btn btn-block" data-bs-toggle="modal" data-bs-target="#inlineForm">
                         <div class="card-body">
-                            <h4 class="card-title">Router TP-Link Archer AX6000</h4>
-                            <p class="card-text">
-                               Router dual-band Wi-Fi 6 (802.11ax) dengan 8 port Gigabit Ethernet, 2 port USB 3.0, dan 1 port WAN Gigabit.
-                            </p>
+                            <div class="d-flex align-items-center">
+                                <div class="avatar avatar-xl">
+                                    <img src="/assets/compiled/jpg/1.jpg" alt="Face 1">
+                                </div>
+                                <div class="ms-3 name">
+                                    <h5 class="font-bold">BDCOM</h5>
+                                    <h6 class="text-muted mb-0">S4800</h6>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-footer d-flex justify-content-between">
-                        <button type="button" class="btn btn-info block" data-bs-toggle="modal"
-                                    data-bs-target="#detaileForm">
-                                    Detail
-                                </button>
-                    </div>
-                    </div>
+                    </button>
                 </div>
             </div>
+
             <div class="col-md-4 col-sm-12">
                 <div class="card">
-                    <div class="card-content">
-                        <img class="card-img-top img-fluid" src="/assets/compiled/png/router.png" alt="Card image cap"
-                            style="height: 20rem" />
+                    <button type="button" class="btn btn-block" data-bs-toggle="modal" data-bs-target="#inlineForm">
                         <div class="card-body">
-                            <h4 class="card-title">Router TP-Link Archer AX6000</h4>
-                            <p class="card-text">
-                              Router dual-band Wi-Fi 6 (802.11ax) dengan 8 port Gigabit Ethernet, 2 port USB 3.0, dan 1 port WAN Gigabit.
-                            </p>
+                            <div class="d-flex align-items-center">
+                                <div class="avatar avatar-xl">
+                                    <img src="/assets/compiled/jpg/1.jpg" alt="Face 1">
+                                </div>
+                                <div class="ms-3 name">
+                                    <h5 class="font-bold">BDCOM</h5>
+                                    <h6 class="text-muted mb-0">S4800</h6>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-footer d-flex justify-content-between">
-                       <button type="button" class="btn btn-info block" data-bs-toggle="modal"
-                                    data-bs-target="#detailForm">
-                                    Detail
-                                </button>
-                    </div>
-                    </div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-12">
+                <div class="card">
+                    <button type="button" class="btn btn-block" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar avatar-xl">
+                                    <img src="/assets/compiled/jpg/1.jpg" alt="Face 1">
+                                </div>
+                                <div class="ms-3 name">
+                                    <h5 class="font-bold">BDCOM</h5>
+                                    <h6 class="text-muted mb-0">S4800</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </button>
                 </div>
             </div>
         </div>
 
         <!-- Detail Modal-->
- <div class="modal fade text-left" id="detailForm" tabindex="-1" role="dialog"
+ <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog"
                                     aria-labelledby="myModalLabel33" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl"
                                         role="document">

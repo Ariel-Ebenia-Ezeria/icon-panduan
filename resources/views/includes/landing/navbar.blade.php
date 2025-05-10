@@ -1,4 +1,4 @@
-<nav class="main-navbar" style="background: linear-gradient(to right, #ffffff, #1e3a8a);  position: fixed; width: 100%; z-index: 1000; top: 0; left: 0; padding: 10px 0;">
+<nav class="main-navbar" style="background: linear-gradient(to right, #ffffff, #0097f5);  position: fixed; width: 100%; z-index: 1000; top: 0; left: 0; padding: 10px 0;">
     <div class="container">
         <!-- Logo Section -->
         <div class="logo" style="display: inline-block; vertical-align: middle; padding-right: 20px;">
