@@ -150,21 +150,27 @@ Dashboard Preconfig Switch
                     <form action="#">
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col-md-4 col-sm-12">
+                                <div class="col-md-3 col-sm-12">
                                     <div class="form-group">
-                                        <label for="basicInput">Seri Swicth</label>
+                                        <label for="basicInput">Brand Swicth</label>
                                         <input type="text" class="form-control" id="basicInput" value="">
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-12">
+                                <div class="col-md-3 col-sm-12">
                                     <div class="form-group">
-                                        <label for="basicInput">Username</label>
+                                        <label for="basicInput">Brand Logo</label>
+                                        <input type="file" class="form-control" id="basicInput" value="">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="basicInput">Username Default</label>
                                         <input type="text" class="form-control" id="basicInput" value="">
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-12">
+                                <div class="col-md-3 col-sm-12">
                                     <div class="form-group">
-                                        <label for="basicInput">Password</label>
+                                        <label for="basicInput">Password Default</label>
                                         <input type="text" class="form-control" id="basicInput" value="">
                                     </div>
                                 </div>

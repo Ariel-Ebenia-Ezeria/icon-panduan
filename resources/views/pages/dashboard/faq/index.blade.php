@@ -249,4 +249,6 @@ Dashboard FAQ
 @endsection
 
 @push('addon-script')
+<script src="/assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
+<script src="/assets/static/js/pages/simple-datatables.js"></script>
 @endpush

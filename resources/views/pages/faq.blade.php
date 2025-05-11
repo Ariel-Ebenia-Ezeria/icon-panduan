@@ -22,13 +22,11 @@ PLN ICON PLUS - Pre-Config Switch
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                 Apa yang harus dilakukan sebelum melakukan aktivasi layanan di ICON+?
                             </button>
                         </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                            data-bs-parent="#accordionExample">
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <!-- <strong>This is the first item's accordion body.</strong>  -->
                                 Sebelum melakukan aktivasi, pastikan semua persyaratan seperti data pelanggan, lokasi
@@ -40,13 +38,11 @@ PLN ICON PLUS - Pre-Config Switch
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                 Bagaimana cara memastikan perangkat yang akan dipasang dalam keadaan baik?
                             </button>
                         </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                            data-bs-parent="#accordionExample">
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <!-- <strong>This is the second item's accordion body.</strong>  -->
                                 Pemeriksaan perangkat dilakukan di gudang sebelum pengeluaran perangkat. Setiap
@@ -58,13 +54,11 @@ PLN ICON PLUS - Pre-Config Switch
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                 Apa itu Testcomm, dan mengapa itu penting dalam aktivasi layanan?
                             </button>
                         </h2>
-                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                            data-bs-parent="#accordionExample">
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <!-- <strong>This is the third item's accordion body.</strong> -->
                                 Testcomm adalah proses pengujian koneksi yang dilakukan setelah instalasi perangkat. Tim
@@ -84,13 +78,15 @@ PLN ICON PLUS - Pre-Config Switch
 
     </section>
     <div class="container">
-        <button type="button" class="btn btn-success block mb-3"
-            onclick="window.open('https://wa.me/6282317616289', '_blank')">
+        <button type="button" class="btn btn-success block mb-3" onclick="window.open('https://wa.me/6282317616289', '_blank')">
             <i class="fab fa-whatsapp"></i>
             Bantuan
         </button>
     </div>
-    @endsection
+</div>
+@endsection
 
-    @push('addon-script')
-    @endpush
+@push('addon-script')
+<script src="/assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
+<script src="/assets/static/js/pages/simple-datatables.js"></script>
+@endpush

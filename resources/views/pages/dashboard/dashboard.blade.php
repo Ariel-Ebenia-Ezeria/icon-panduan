@@ -99,4 +99,7 @@ Dashboard
 @endsection
 
 @push('addon-script')
+<!-- Need: Apexcharts -->
+<script src="/assets/extensions/apexcharts/apexcharts.min.js"></script>
+<script src="/assets/static/js/pages/dashboard.js"></script>
 @endpush
