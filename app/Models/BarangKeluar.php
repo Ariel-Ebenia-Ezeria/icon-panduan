@@ -15,13 +15,23 @@ class BarangKeluar extends Model
      * @var array
      */
     protected $fillable = [
-        'id_barang',
+        'tanggal_pengambilan',
+        'jenis_kebutuhan',
+        'nama_engineer',
+        'nama_mitra',
+        'no_pa_ar',
+        'lokasi_pemasangan',
+        'jenis_barang',
         'jumlah',
-        'tujuan',
-        'tanggal_keluar',
-        'keterangan',
-        'created_at',
-        'updated_at',
+        'status_rsvp',
+        'kode_rsvp',
+        'kode_gi',
+        'no_io',
+        'plant',
+        'storage_location',
+        'df_stor_loc_level',
+        'batch_real',
+        'batch',
     ];
 
     public function barang()
