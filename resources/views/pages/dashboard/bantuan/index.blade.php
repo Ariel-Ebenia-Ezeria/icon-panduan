@@ -44,7 +44,7 @@ Dashboard Bantuan
                         <tr>
                             <td style="width:5%;">{{ $no++ }}</td>
                             <td>{{ $item->nama }}</td>
-                            <td>{{ $item->kontak }}</td>
+                            <td>+62{{ $item->kontak }}</td>
                             <td style="width:20%;">
                                 <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#ubahForm"
                                     data-id="{{ $item->id }}"

@@ -53,7 +53,7 @@
                     <ul class="submenu ">
 
                         <li class="submenu-item {{ request()->is('switch') ? 'active' : '' }}">
-                            <a href="{{ route('switch.index') }}" class="submenu-link">Swicth</a>
+                            <a href="{{ route('switch.index') }}" class="submenu-link">Switch</a>
 
                         </li>
 

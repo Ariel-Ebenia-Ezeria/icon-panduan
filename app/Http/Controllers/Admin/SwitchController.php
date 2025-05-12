@@ -37,7 +37,7 @@ class SwitchController extends Controller
         $data['logo'] = $request->file('logo')->store('assets/switch', 'public');
 
         Switchh::create($data);
-        return redirect()->route('switch.index')->with('success', 'Barang berhasil ditambahkan');
+        return redirect()->route('switch.index')->with('success', 'Switch berhasil ditambahkan');
     }
 
     /**
@@ -70,7 +70,7 @@ class SwitchController extends Controller
         }
 
         $switch->update($data);
-        return redirect()->route('switch.index')->with('success', 'Barang berhasil diubah');
+        return redirect()->route('switch.index')->with('success', 'Switch berhasil diubah');
     }
 
     /**
@@ -82,6 +82,6 @@ class SwitchController extends Controller
             Storage::disk('public')->delete($switch->logo);
         }
         $switch->delete();
-        return redirect()->route('switch.index')->with('success', 'Barang berhasil dihapus');
+        return redirect()->route('switch.index')->with('success', 'Switch berhasil dihapus');
     }
 }

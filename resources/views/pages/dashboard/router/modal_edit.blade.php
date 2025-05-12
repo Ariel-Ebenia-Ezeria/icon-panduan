@@ -3,93 +3,57 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel33">BDCOM S4800</h4>
+                <h4 class="modal-title" id="myModalLabel33">Ubah Data</h4>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <i data-feather="x"></i>
                 </button>
             </div>
-            <form action="">
+            <form action="" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-6 col-sm-12">
+                        <div class="col-md-3 col-sm-12">
                             <div class="form-group">
-                                <label for="basicInput">Username</label>
-                                <input type="text" class="form-control" id="basicInput" value="admin">
+                                <label for="brand">Brand</label>
+                                <input type="text" class="form-control" id="brand" name="brand">
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-12">
+                        <div class=" col-md-3 col-sm-12">
                             <div class="form-group">
-                                <label for="basicInput">Password</label>
-                                <input type="text" class="form-control" id="basicInput" value="12345" readonly>
+                                <label for="logo">Logo</label>
+                                <input type="file" class="form-control" id="logo" name="logo">
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-12">
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" id="username" name="username">
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-12">
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="text" class="form-control" id="password" name="password">
                             </div>
                         </div>
                     </div>
-                    <label>Pre-Config </label>
+                    <label for="preconfig">Pre-Config </label>
                     <div class="form-group">
-                        <textarea class="form-control" rows="5" readonly>config
-hostname RKAL-GEDUNG.ARSITEKTUR.UPR-FH.S4800.8P-CPE-01
-vlan 15
-alias WAN-NMS-RKAL
-quit
-vlan 908
-alias METRO-200MBPS
-quit 
-int vlan 15
-ip address 172.27.192.35/29
-quit
-ip route-static 0.0.0.0 0.0.0.0 172.27.192.33
-ip route-static 10.14.4.0 255.255.255.0  172.27.192.33
-ip route-static 10.14.3.0 255.255.255.0  172.27.192.33
-int gi 1/0/1
-alias "311202002379 METRO GEDUNG ARSITEKTUR, UPR"
-port link-type access
-port default vlan 908
-quit
-int gi 1/0/2
-alias "311202002379 METRO GEDUNG ARSITEKTUR, UPR"
-port link-type access
-port default vlan 908
-quit
-int gi 1/0/3
-alias "311202002379 METRO GEDUNG ARSITEKTUR, UPR"
-port link-type access
-port default vlan 908
-quit
-int gi 1/0/4
-alias "311202002379 METRO GEDUNG ARSITEKTUR, UPR"
-port link-type access
-port default vlan 908
-quit
-int gi 1/0/5
-alias "311202002379 METRO GEDUNG ARSITEKTUR, UPR"
-port link-type access
-port default vlan 908
-quit
-int gi 1/0/6
-alias "311202002379 METRO GEDUNG ARSITEKTUR, UPR"
-port link-type access
-port default vlan 908
-quit
-int gi 1/0/9
-alias "311202002379 METRO GEDUNG ARSITEKTUR, UPR"
-port link-type trunk
-port trunk allow-pass vlan 15,908
-quit
-wr f
-
-                                                     </textarea>
+                        <button type="button" id="copyPreconfig" class="btn btn-secondary mt-2">Copy to
+                            Clipboard</button>
+                        <textarea id="preconfig" name="preconfig" class="form-control" rows="5"></textarea>
                     </div>
-                    <label>Command Pendukung </label>
+                    <label for="command">Command Pendukung </label>
                     <div class="form-group">
-                        <textarea class="form-control" rows="3" readonly>enable          
-configure terminal 
-</textarea>
+                        <button type="button" id="copyCommand" class="btn btn-secondary mt-2">Copy to Clipboard</button>
+                        <textarea id="command" name="command" class="form-control" rows="3"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary ms-1" data-bs-dismiss="modal">
+                    <button type="submit" class="btn btn-primary ms-1">
                         <i class="bx bx-check d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Kembali</span>
+                        <span class="d-none d-sm-block">Simpan</span>
                     </button>
                 </div>
             </form>

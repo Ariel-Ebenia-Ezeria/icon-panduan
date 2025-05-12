@@ -22,28 +22,34 @@ PLN ICON PLUS - Gudang
                 <table class="table table-striped" id="table1">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>Kode Material</th>
                             <th>Nama Material</th>
                             <th>Jenis Barang</th>
                             <th>Material Description</th>
                             <th>Stok</th>
+                            <th>Satuan</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                        $no=1;
+                        @endphp
+                        @forelse($barangs as $item)
                         <tr>
-                            <td>1101010115</td>
-                            <td>Kabel FOC</td>
-                            <td>Kabel FOC</td>
-                            <td>FOC,ADSS SS 100m 6F/1T,Kuning,,ZTT</td>
-                            <td>50 pcs</td>
+                            <td>{{ $no++ }}</td>
+                            <td>{{ $item->kode_material }}</td>
+                            <td>{{ $item->nama_material }}</td>
+                            <td>{{ $item->jenis_material }}</td>
+                            <td>{{ $item->deskripsi_material }}</td>
+                            <td>{{ $item->stok }}</td>
+                            <td>{{ $item->satuan }}</td>
                         </tr>
+                        @empty
                         <tr>
-                            <td>1101010080</td>
-                            <td>Kabel FOC</td>
-                            <td>Kabel FOC</td>
-                            <td>FOC,ADSS SS 100m,24F/4T,Strip Biru,JEMBO</td>
-                            <td>150 pcs</td>
+                            <td colspan="7" class="text-center">Data Kosong</td>
                         </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

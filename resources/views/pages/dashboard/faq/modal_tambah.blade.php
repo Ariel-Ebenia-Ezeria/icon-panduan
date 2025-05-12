@@ -1,5 +1,5 @@
 <div class="modal fade text-left" id="tambahForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel33">Tambah Data</h4>
@@ -7,20 +7,16 @@
                     <i data-feather="x"></i>
                 </button>
             </div>
-            <form action="{{ route('bantuan.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('faq.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
-                    <label for="nama">Nama</label>
+                    <label for="pertanyaan">Pertanyaan</label>
                     <div class="form-group">
-                        <input id="nama" name="nama" type="text" placeholder="" class="form-control" required>
+                        <input id="pertanyaan" name="pertanyaan" type="text" placeholder="" class="form-control" required>
                     </div>
-                    <label for="kontak">Kontak</label>
+                    <label for="jawaban">Jawaban</label>
                     <div class="form-group">
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">+62</span>
-                            <input type="text" id="kontak" name="kontak" class="form-control" placeholder="81234567"
-                                 aria-describedby="basic-addon1">
-                        </div>
+                        <textarea id="jawaban" name="jawaban" class="form-control" rows="3" required></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
