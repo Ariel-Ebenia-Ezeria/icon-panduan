@@ -100,6 +100,22 @@ Dashboard Data Barang
 <script src="/assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
 <script src="/assets/static/js/pages/simple-datatables.js"></script>
 
+{{-- Pop up success --}}
+@if (session('success'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: '{{ session('success') }}',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        });
+    </script>
+@endif
+{{-- end pop up success --}}
+
 {{-- lempar data ke modal ubah --}}
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -162,21 +178,5 @@ Dashboard Data Barang
     });
 </script>
 {{-- end pop up delete --}}
-
-{{-- Pop up success --}}
-@if (session('success'))
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            Swal.fire({
-                icon: 'success',
-                title: 'Berhasil!',
-                text: '{{ session('success') }}',
-                timer: 2000,
-                showConfirmButton: false
-            });
-        });
-    </script>
-@endif
-{{-- end pop up success --}}
 
 @endpush

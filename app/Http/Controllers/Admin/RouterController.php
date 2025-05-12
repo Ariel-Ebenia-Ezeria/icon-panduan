@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RouterRequest;
 use Illuminate\Http\Request;
 
 class RouterController extends Controller
@@ -26,9 +27,14 @@ class RouterController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(RouterRequest $request)
     {
-        //
+        $data = $request->all();
+        return $data;
+        // $data['logo'] = $request->file('logo')->store('assets/switch', 'public');
+
+        // Switchh::create($data);
+        // return redirect()->route('switch.index')->with('success', 'Barang berhasil ditambahkan');
     }
 
     /**
