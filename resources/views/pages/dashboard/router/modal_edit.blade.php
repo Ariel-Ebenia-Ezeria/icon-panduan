@@ -40,13 +40,13 @@
                     </div>
                     <label for="preconfig">Pre-Config </label>
                     <div class="form-group">
-                        <button type="button" id="copyPreconfig" class="btn btn-secondary mt-2">Copy to
-                            Clipboard</button>
+                        {{-- <button type="button" id="copyPreconfig" class="btn btn-secondary mt-2">Copy to
+                            Clipboard</button> --}}
                         <textarea id="preconfig" name="preconfig" class="form-control" rows="5"></textarea>
                     </div>
                     <label for="command">Command Pendukung </label>
                     <div class="form-group">
-                        <button type="button" id="copyCommand" class="btn btn-secondary mt-2">Copy to Clipboard</button>
+                        {{-- <button type="button" id="copyCommand" class="btn btn-secondary mt-2">Copy to Clipboard</button> --}}
                         <textarea id="command" name="command" class="form-control" rows="3"></textarea>
                     </div>
                 </div>

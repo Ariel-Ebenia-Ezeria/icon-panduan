@@ -102,6 +102,8 @@ PLN ICON PLUS - Pre-Config Router
 @endsection
 
 @push('addon-script')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 {{-- lempar data ke modal detail --}}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -128,4 +130,39 @@ PLN ICON PLUS - Pre-Config Router
     });
 </script>
 {{-- end lempar data ke modal detail --}}
+
+{{-- Toast Copy Clipboard --}}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        function showToast(icon, message) {
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: icon,
+                title: message,
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true
+            });
+        }
+
+        function copyText(id) {
+            const text = document.getElementById(id).value;
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('success', 'Teks berhasil disalin!');
+            }).catch(() => {
+                showToast('error', 'Gagal menyalin teks!');
+            });
+        }
+
+        document.getElementById('copyPreconfig')?.addEventListener('click', function() {
+            copyText('preconfig');
+        });
+
+        document.getElementById('copyCommand')?.addEventListener('click', function() {
+            copyText('command');
+        });
+    });
+</script>
+{{-- End Toast --}}
 @endpush

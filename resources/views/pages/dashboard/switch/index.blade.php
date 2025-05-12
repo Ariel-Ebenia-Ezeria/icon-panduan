@@ -157,31 +157,4 @@ Dashboard Preconfig Switch
 </script>
 {{-- end pop up delete --}}
 
-<script>
-    // Function to copy text to clipboard
-    function copyToClipboard(text) {
-        // Create a temporary textarea to select and copy the text
-        var tempTextArea = document.createElement("textarea");
-        tempTextArea.value = text;
-        document.body.appendChild(tempTextArea);
-        tempTextArea.select();
-        document.execCommand("copy");
-        document.body.removeChild(tempTextArea);
-    }
-
-    // Add event listener to copy preconfig text
-    document.getElementById("copyPreconfig").addEventListener("click", function() {
-        var preconfigText = document.getElementById("preconfig").value;
-        copyToClipboard(preconfigText);
-        alert("Pre-config berhasil disalin!");
-    });
-
-    // Add event listener to copy command text
-    document.getElementById("copyCommand").addEventListener("click", function() {
-        var commandText = document.getElementById("command").value;
-        copyToClipboard(commandText);
-        alert("Command berhasil disalin!");
-    });
-</script>
-
 @endpush

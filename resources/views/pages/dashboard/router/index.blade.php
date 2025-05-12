@@ -16,7 +16,8 @@ Dashboard Preconfig Router
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3>Router
-                    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#tambahForm">
+                    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                        data-bs-target="#tambahForm">
                         +
                     </button>
                 </h3>
@@ -28,7 +29,10 @@ Dashboard Preconfig Router
             @forelse ($router as $item)
             <div class="col-md-4 col-sm-12">
                 <div class="card">
-                    <button type="button" class="btn btn-block" data-bs-toggle="modal" data-bs-target="#ubahForm" data-id="{{ $item->id }}" data-brand="{{ $item->brand }}" data-username="{{ $item->username }}" data-password="{{ $item->password }}" data-preconfig="{{ $item->preconfig }}" data-command="{{ $item->command }}">
+                    <button type="button" class="btn btn-block" data-bs-toggle="modal" data-bs-target="#ubahForm"
+                        data-id="{{ $item->id }}" data-brand="{{ $item->brand }}" data-username="{{ $item->username }}"
+                        data-password="{{ $item->password }}" data-preconfig="{{ $item->preconfig }}"
+                        data-command="{{ $item->command }}">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div class="avatar avatar-xl">
@@ -75,107 +79,82 @@ Dashboard Preconfig Router
 {{-- Pop up success --}}
 @if (session('success'))
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        Swal.fire({
-            icon: 'success',
-            title: 'Berhasil!',
-            text: '{{ session('
-            success ') }}',
-            timer: 2000,
-            showConfirmButton: false
-        });
+document.addEventListener('DOMContentLoaded', function() {
+    Swal.fire({
+        icon: 'success',
+        title: 'Berhasil!',
+        text: '{{ session('
+        success ') }}',
+        timer: 2000,
+        showConfirmButton: false
     });
+});
 </script>
 @endif
 {{-- end pop up success --}}
 
 {{-- lempar data ke modal ubah --}}
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const ubahFormModal = document.getElementById('ubahForm');
+document.addEventListener('DOMContentLoaded', function() {
+    const ubahFormModal = document.getElementById('ubahForm');
 
-        ubahFormModal.addEventListener('show.bs.modal', function(event) {
-            const button = event.relatedTarget;
+    ubahFormModal.addEventListener('show.bs.modal', function(event) {
+        const button = event.relatedTarget;
 
-            // Ambil data dari button
-            const id = button.getAttribute('data-id');
-            const brand = button.getAttribute('data-brand');
-            const username = button.getAttribute('data-username');
-            const password = button.getAttribute('data-password');
-            const preconfig = button.getAttribute('data-preconfig');
-            const command = button.getAttribute('data-command');
+        // Ambil data dari button
+        const id = button.getAttribute('data-id');
+        const brand = button.getAttribute('data-brand');
+        const username = button.getAttribute('data-username');
+        const password = button.getAttribute('data-password');
+        const preconfig = button.getAttribute('data-preconfig');
+        const command = button.getAttribute('data-command');
 
-            // Isi input di modal
-            ubahFormModal.querySelector('#brand').value = brand;
-            ubahFormModal.querySelector('#username').value = username;
-            ubahFormModal.querySelector('#password').value = password;
-            ubahFormModal.querySelector('#preconfig').value = preconfig;
-            ubahFormModal.querySelector('#command').value = command;
+        // Isi input di modal
+        ubahFormModal.querySelector('#brand').value = brand;
+        ubahFormModal.querySelector('#username').value = username;
+        ubahFormModal.querySelector('#password').value = password;
+        ubahFormModal.querySelector('#preconfig').value = preconfig;
+        ubahFormModal.querySelector('#command').value = command;
 
-            // Set action form (jika pakai route update)
-            ubahFormModal.querySelector('form').action = `/router/${id}`;
-        });
+        // Set action form (jika pakai route update)
+        ubahFormModal.querySelector('form').action = `/router/${id}`;
     });
+});
 </script>
 {{-- end lempar data ke modal ubah --}}
 
 {{-- Pop up delete --}}
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const deleteButtons = document.querySelectorAll('.delete-button');
-        const deleteForm = document.getElementById('deleteForm');
+document.addEventListener('DOMContentLoaded', function() {
+    const deleteButtons = document.querySelectorAll('.delete-button');
+    const deleteForm = document.getElementById('deleteForm');
 
-        deleteButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const itemId = this.getAttribute('data-id');
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const itemId = this.getAttribute('data-id');
 
-                Swal.fire({
-                    title: 'Yakin ingin menghapus?',
-                    text: "Data akan hilang secara permanen!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Ya, hapus!',
-                    cancelButtonText: 'Batal'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        deleteForm.action =
-                            `/router/${itemId}`; // Sesuaikan URL jika pakai prefix
-                        deleteForm.submit();
-                    }
-                });
+            Swal.fire({
+                title: 'Yakin ingin menghapus?',
+                text: "Data akan hilang secara permanen!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    deleteForm.action =
+                        `/router/${itemId}`; // Sesuaikan URL jika pakai prefix
+                    deleteForm.submit();
+                }
             });
         });
     });
+});
 </script>
 {{-- end pop up delete --}}
 
-<script>
-    // Function to copy text to clipboard
-    function copyToClipboard(text) {
-        // Create a temporary textarea to select and copy the text
-        var tempTextArea = document.createElement("textarea");
-        tempTextArea.value = text;
-        document.body.appendChild(tempTextArea);
-        tempTextArea.select();
-        document.execCommand("copy");
-        document.body.removeChild(tempTextArea);
-    }
 
-    // Add event listener to copy preconfig text
-    document.getElementById("copyPreconfig").addEventListener("click", function() {
-        var preconfigText = document.getElementById("preconfig").value;
-        copyToClipboard(preconfigText);
-        alert("Pre-config berhasil disalin!");
-    });
-
-    // Add event listener to copy command text
-    document.getElementById("copyCommand").addEventListener("click", function() {
-        var commandText = document.getElementById("command").value;
-        copyToClipboard(commandText);
-        alert("Command berhasil disalin!");
-    });
-</script>
 
 @endpush
