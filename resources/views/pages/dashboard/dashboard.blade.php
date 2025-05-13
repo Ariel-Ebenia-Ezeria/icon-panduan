@@ -23,7 +23,7 @@ Dashboard
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                     <h6 class="text-muted font-semibold">Jumlah Barang</h6>
-                                    <h6 class="font-extrabold mb-0">200</h6>
+                                    <h6 class="font-extrabold mb-0">{{ $jml_material }}</h6>
                                 </div>
                             </div>
                         </div>
@@ -40,7 +40,7 @@ Dashboard
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                     <h6 class="text-muted font-semibold">Jumlah Swicth</h6>
-                                    <h6 class="font-extrabold mb-0">3</h6>
+                                    <h6 class="font-extrabold mb-0">{{ $jml_switch }}</h6>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +57,7 @@ Dashboard
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                     <h6 class="text-muted font-semibold">Jumlah Router</h6>
-                                    <h6 class="font-extrabold mb-0">3</h6>
+                                    <h6 class="font-extrabold mb-0">{{ $jml_router }}</h6>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +74,7 @@ Dashboard
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                     <h6 class="text-muted font-semibold">Jumlah Pertanyaan</h6>
-                                    <h6 class="font-extrabold mb-0">3</h6>
+                                    <h6 class="font-extrabold mb-0">{{ $jml_pertanyaan }}</h6>
                                 </div>
                             </div>
                         </div>
@@ -88,7 +88,9 @@ Dashboard
                             <h4>Barang Keluar</h4>
                         </div>
                         <div class="card-body">
-                            <div id="chart-profile-visit"></div>
+                            {{-- <div id="chart-profile-visit"></div> --}}
+                            {{-- <canvas id="lineChartBarangKeluar" height="120"></canvas> --}}
+                            <canvas id="stackedChartBarangKeluar" height="120"></canvas>
                         </div>
                     </div>
                 </div>
@@ -102,4 +104,66 @@ Dashboard
 <!-- Need: Apexcharts -->
 <script src="/assets/extensions/apexcharts/apexcharts.min.js"></script>
 <script src="/assets/static/js/pages/dashboard.js"></script>
+
+{{-- start chart --}}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Line chart per tanggal
+    new Chart(document.getElementById('lineChartBarangKeluar'), {
+        type: 'line',
+        data: {
+            labels: {!! json_encode($tanggal) !!},
+            datasets: [{
+                label: 'Barang Keluar per Tanggal',
+                data: {!! json_encode($total) !!},
+                borderColor: 'blue',
+                tension: 0.3,
+                fill: false
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Barang Keluar per Tanggal'
+                }
+            }
+        }
+    });
+
+    // Stacked bar chart per bulan
+    new Chart(document.getElementById('stackedChartBarangKeluar'), {
+        type: 'bar',
+        data: {
+            labels: {!! json_encode($bulanList) !!},
+            datasets: {!! json_encode($datasets) !!}
+        },
+        options: {
+            responsive: true,
+            interaction: {
+                mode: 'index',
+                intersect: false,
+            },
+            stacked: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Jumlah Barang Keluar per Bulan (per Item)'
+                }
+            },
+            scales: {
+                x: {
+                    stacked: true
+                },
+                y: {
+                    stacked: true,
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+{{-- end chart --}}
 @endpush

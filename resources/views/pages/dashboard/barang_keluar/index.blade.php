@@ -3,6 +3,9 @@
 @section('title')
 Dashboard Barang Keluar
 @endsection
+@push('prepend-style')
+<link rel="stylesheet" href="assets/extensions/choices.js/public/assets/styles/choices.css">
+@endpush
 @push('addon-style')
 <link rel="stylesheet" href="/assets/extensions/simple-datatables/style.css">
 <link rel="stylesheet" href="/assets/compiled/css/table-datatable.css">
@@ -37,578 +40,250 @@ Dashboard Barang Keluar
                 <table class="table table-striped" id="table1">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>Tanggal Pengambilan</th>
                             <th>Jenis Kebutuhan</th>
                             <th>Nama Enginner</th>
                             <th>Nama Mitra</th>
                             <th>Nomor PA/AR</th>
-                            <th>Lokasi Pemasangan</th>
-                            <th>Jenis Kabel</th>
-                            <th>Panjang Kabel</th>
-                            <th>Status Reservasi</th>
                             <th>Kode Reservasi</th>
+                            <th>Status Reservasi</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                        $no=1;
+                        @endphp
+                        @forelse($barang_keluars as $item)
                         <tr>
-                            <td>24/09/2022</td>
-                            <td>AKTIVASI</td>
-                            <td>NAZIM</td>
-                            <td>INTERNAL</td>
-                            <td>PA/ACT/2207/3517/TER</td>
-                            <td>Indomaret Soekarno Hatta</td>
-                            <td>6 CORE</td>
-                            <td>200</td>
+                            <td>{{ $no++ }}</td>
                             <td>
-                                <span class="badge bg-success">Sudah Reservasi</span>
+                                {{ \Carbon\Carbon::parse($item->tanggal_pengambilan)->translatedFormat('d F Y') }}</td>
+                            <td>{{ $item->jenis_kebutuhan }}</td>
+                            <td>{{ $item->nama_engineer}}</td>
+                            <td>{{ $item->nama_mitra}}</td>
+                            <td>{{ $item->no_pa_ar}}</td>
+                            <td>{{ $item->kode_rsvp}}</td>
+                            <td>
+                                @if($item->status_rsvp == 'Sudah Reservasi')
+                                    <span class="badge bg-success">Sudah Reservasi</span>
+                                @else
+                                    <span class="badge bg-warning">{{ $item->status_rsvp }}</span>
+                                @endif
                             </td>
-                            <td>1188575</td>
-                            <td>
-                                <button type="button" class="btn btn-outline-info" data-bs-toggle="modal"
-                                    data-bs-target="#detailModal">
-                                    Detail
-                                </button> 
-                                 <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal">
-                                    <i class="bi bi-trash"></i>
+                            <td >
+                                <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#ubahForm"
+                                    data-id="{{ $item->id }}"
+                                    data-tanggal_pengambilan="{{ $item->tanggal_pengambilan }}"
+                                    data-jenis_kebutuhan="{{ $item->jenis_kebutuhan }}"
+                                    data-nama_engineer="{{ $item->nama_engineer }}"
+                                    data-nama_mitra="{{ $item->nama_mitra }}"
+                                    data-no_pa_ar="{{ $item->no_pa_ar }}"
+                                    data-lokasi_pemasangan="{{ $item->lokasi_pemasangan }}"
+                                    data-jumlah="{{ $item->jumlah }}"
+                                    data-status_rsvp="{{ $item->status_rsvp }}"
+                                    data-kode_rsvp="{{ $item->kode_rsvp }}"
+                                    data-kode_gi="{{ $item->kode_gi }}"
+                                    data-no_io="{{ $item->no_io }}"
+                                    data-keterangan="{{ $item->keterangan }}"
+                                    data-barang_id="{{ $item->barang_id }}"
+                                    data-nama_barang="{{ $item->barang->nama_material }}"
+                                    data-plant="{{ $item->plant }}"
+                                    data-storage_location="{{ $item->storage_location }}"
+                                    data-df_stor_loc_level="{{ $item->df_stor_loc_level }}"
+                                    data-batch_real="{{ $item->batch_real }}"
+                                    data-batch="{{ $item->batch }}"
+                                    data-jenis_barang="{{ $item->barang->jenis_material }}"
+                                    data-keterangan_barang="{{ $item->barang->deskripsi_material }}"
+                                    >
+                                    <i class="bi bi-pencil"></i> Ubah
                                 </button>
+                                <button type="button" class="btn btn-outline-danger delete-button" data-id="{{ $item->id }}">
+                                    <i class="bi bi-trash"></i> Hapus
+                                </button>
+                                <form id="deleteForm" method="POST" style="display: none;">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
                             </td>
                         </tr>
+                        @empty
                         <tr>
-                            <td>24/09/2022</td>
-                            <td>GANGGUAN</td>
-                            <td>YUSRIL</td>
-                            <td>INTERNAL</td>
-                            <td>4500018744</td>
-                            <td>GIS MINTIN-GI PULPIS</td>
-                            <td>24 CORE</td>
-                            <td>4000</td>
-                            <td>
-                                <span class="badge bg-success">Sudah Reservasi</span>
-                            </td>
-                            <td>1188575</td>
-                            <td>
-                                <div class="d-flex gap-2">
-    <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#detailModal1">
-        Detail
-    </button>
-    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
-        <i class="bi bi-trash"></i>
-    </button>
-</div>
-
-                            </td>
+                            <td colspan="9" class="text-center">Data Kosong</td>
                         </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
         </div>
 
-<!-- Tambah Modal -->
-        <div class="modal fade text-left w-100" id="tambahModal" tabindex="-1" role="dialog"
-            aria-labelledby="myModalLabel20" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-full"
-                role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel20">Detail Barang Keluar</h4>
-                        <button type="button" class="close" data-bs-dismiss="modal"
-                            aria-label="Close">
-                            <i data-feather="x"></i>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Tanggal Penggambilan</label>
-                                    <input type="date" class="form-control" id="basicInput" placeholder=""> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Jenis Kebutuhan</label>
-                                    <input type="text" class="form-control" id="basicInput" placeholder=""> 
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Nama Enginneer</label>
-                                    <input type="text" class="form-control" id="basicInput" placeholder=""> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Nama Mitra</label>
-                                    <input type="text" class="form-control" id="basicInput" placeholder=""> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">NO PA / AR</label>
-                                    <input type="text" class="form-control" id="basicInput" placeholder=""> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Lokasi Pemasangan</label>
-                                    <input type="text" class="form-control" id="basicInput" placeholder=""> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Jenis Kabel</label>
-                                    <input type="text" class="form-control" id="basicInput" placeholder=""> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Panjang Kabel</label>
-                                    <input type="text" class="form-control" id="basicInput" placeholder=""> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Status Reservasi</label>
-                                    <input type="text" class="form-control" id="basicInput" placeholder=""> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Kode Reservasi</label>
-                                    <input type="text" class="form-control" id="basicInput" placeholder=""> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Kode Reservasi</label>
-                                    <input type="text" class="form-control" id="basicInput" placeholder=""> 
-                                </div>  
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Kode GI</label>
-                                    <input type="text" class="form-control" id="basicInput" placeholder=""> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">NO IO</label>
-                                    <input type="text" class="form-control" id="basicInput" placeholder=""> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Keterangan</label>
-                                    <input type="text" class="form-control" id="basicInput" placeholder=""> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Material</label>
-                                    <input type="text" class="form-control" id="basicInput" placeholder=""> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Material Description</label>
-                                    <input type="text" class="form-control" id="basicInput" placeholder=""> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Palnt</label>
-                                    <input type="text" class="form-control" id="basicInput" placeholder=""> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Storage Location</label>
-                                    <input type="text" class="form-control" id="basicInput" placeholder=""> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">DF stor. loc. level</label>
-                                    <input type="text" class="form-control" id="basicInput" placeholder=""> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Batch Real</label>
-                                    <input type="text" class="form-control" id="basicInput" placeholder=""> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Batch</label>
-                                    <input type="text" class="form-control" id="basicInput" placeholder=""> 
-                                </div> 
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light-secondary"
-                            data-bs-dismiss="modal">
-                            <i class="bx bx-x d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">Close</span>
-                        </button>
-                        <!-- <button type="button" class="btn btn-primary ms-1"
-                            data-bs-dismiss="modal">
-                            <i class="bx bx-check d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">Accept</span>
-                        </button> -->
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- Tambah Modal -->
-
-<!-- Delete Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable"
-                                    role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header bg-danger">
-                                            <i class="bi bi-exclamation-circle-fill" style="color: white;"></i>
-                                            <h5 class="modal-title" id="exampleModalCenterTitle" style="color: white;">
-                                                Apakah Anda Yakin Ingin Menghapus?
-                                            </h5>
-                                            <button type="button" class="close" data-bs-dismiss="modal"
-                                                aria-label="Close">
-                                                <i data-feather="x"></i>
-                                            </button>
-                                        </div>
-                                        <!-- <div class="modal-body">
-                                            <p>
-                                                Croissant jelly-o halvah chocolate sesame snaps. Brownie caramels candy
-                                                canes chocolate cake
-                                                marshmallow icing lollipop I love. Gummies macaroon donut caramels
-                                                biscuit topping danish.
-                                            </p>
-                                        </div> -->
-                                        <div class="modal-footer d-flex justify-content-between">
-                                            <button type="button" class="btn btn-outline-info" data-bs-toggle="modal"
-                                            data-bs-target="#info">
-                                            Tidak
-                                        </button>
-                                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
-                                            data-bs-target="#danger">
-                                            Ya
-                                        </button>
-                                </div>
-                        </div>
-                </div>
-        </div>
-<!-- End Delete Modal -->
-
-        <!-- Detail Modal -->
-        <div class="modal fade text-left w-100" id="detailModal" tabindex="-1" role="dialog"
-            aria-labelledby="myModalLabel20" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-full"
-                role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel20">Detail Barang Keluar</h4>
-                        <button type="button" class="close" data-bs-dismiss="modal"
-                            aria-label="Close">
-                            <i data-feather="x"></i>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Tanggal Penggambilan</label>
-                                    <input type="text" class="form-control" id="basicInput" value="24/09/2022" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Jenis Kebutuhan</label>
-                                    <input type="text" class="form-control" id="basicInput" value="AKTIVASI" disabled> 
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Nama Enginneer</label>
-                                    <input type="text" class="form-control" id="basicInput" value="NAZIM" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Nama Mitra</label>
-                                    <input type="text" class="form-control" id="basicInput" value="INTERNAL" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">NO PA / AR</label>
-                                    <input type="text" class="form-control" id="basicInput" value="PA/ACT/2207/3517/TER" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Lokasi Pemasangan</label>
-                                    <input type="text" class="form-control" id="basicInput" value="Indomaret Soekarno Hatta" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Jenis Kabel</label>
-                                    <input type="text" class="form-control" id="basicInput" value="6 CORE" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Panjang Kabel</label>
-                                    <input type="text" class="form-control" id="basicInput" value="200" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Status Reservasi</label>
-                                    <input type="text" class="form-control" id="basicInput" value="SUDAH RESERVASI" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Kode Reservasi</label>
-                                    <input type="text" class="form-control" id="basicInput" value="1188575" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Kode GI</label>
-                                    <input type="text" class="form-control" id="basicInput" value="4901133207" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">NO IO</label>
-                                    <input type="text" class="form-control" id="basicInput" value="" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Keterangan</label>
-                                    <input type="text" class="form-control" id="basicInput" value="DIAMBIL" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Material</label>
-                                    <input type="text" class="form-control" id="basicInput" value="1101010115" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Material Description</label>
-                                    <input type="text" class="form-control" id="basicInput" value="FOC,ADSS SS 100m 6F/1T,Kuning,,ZTT" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Palnt</label>
-                                    <input type="text" class="form-control" id="basicInput" value="2010" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Storage Location</label>
-                                    <input type="text" class="form-control" id="basicInput" value="4" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">DF stor. loc. level</label>
-                                    <input type="text" class="form-control" id="basicInput" value="" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Batch Real</label>
-                                    <input type="text" class="form-control" id="basicInput" value="21-A5652" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Batch</label>
-                                    <input type="text" class="form-control" id="basicInput" value="K210220665" disabled> 
-                                </div> 
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light-secondary"
-                            data-bs-dismiss="modal">
-                            <i class="bx bx-x d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">Close</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-         <div class="modal fade text-left w-100" id="detailModal1" tabindex="-1" role="dialog"
-            aria-labelledby="myModalLabel20" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-full"
-                role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel20">Detail Barang Keluar</h4>
-                        <button type="button" class="close" data-bs-dismiss="modal"
-                            aria-label="Close">
-                            <i data-feather="x"></i>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Tanggal Penggambilan</label>
-                                    <input type="text" class="form-control" id="basicInput" value="24/09/2022" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Jenis Kebutuhan</label>
-                                    <input type="text" class="form-control" id="basicInput" value="GANGGUAN" disabled> 
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Nama Enginneer</label>
-                                    <input type="text" class="form-control" id="basicInput" value="YUSRIL" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Nama Mitra</label>
-                                    <input type="text" class="form-control" id="basicInput" value="Internal" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">NO PA / AR</label>
-                                    <input type="text" class="form-control" id="basicInput" value="4500018744" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Lokasi Pemasangan</label>
-                                    <input type="text" class="form-control" id="basicInput" value="GIS MINTIN-GI PULPIS" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Jenis Kabel</label>
-                                    <input type="text" class="form-control" id="basicInput" value="24 CORE" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Panjang Kabel</label>
-                                    <input type="text" class="form-control" id="basicInput" value="4000" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Status Reservasi</label>
-                                    <input type="text" class="form-control" id="basicInput" value="SUDAH RESERVASI" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Kode Reservasi</label>
-                                    <input type="text" class="form-control" id="basicInput" value="1191967" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Kode GI</label>
-                                    <input type="text" class="form-control" id="basicInput" value="4901136854" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">NO IO</label>
-                                    <input type="text" class="form-control" id="basicInput" value="102230B0121J" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Keterangan</label>
-                                    <input type="text" class="form-control" id="basicInput" value="DIAMBIL" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Material</label>
-                                    <input type="text" class="form-control" id="basicInput" value="1101010115" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Material Description</label>
-                                    <input type="text" class="form-control" id="basicInput" value="FOC,ADSS SS 100m,24F/4T,Strip Biru,JEMBO" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Palnt</label>
-                                    <input type="text" class="form-control" id="basicInput" value="2010" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Storage Location</label>
-                                    <input type="text" class="form-control" id="basicInput" value="4" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">DF stor. loc. level</label>
-                                    <input type="text" class="form-control" id="basicInput" value="" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Batch Real</label>
-                                    <input type="text" class="form-control" id="basicInput" value="" disabled> 
-                                </div> 
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label for="basicInput">Batch</label>
-                                    <input type="text" class="form-control" id="basicInput" value="37630740" disabled> 
-                                </div> 
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light-secondary"
-                            data-bs-dismiss="modal">
-                            <i class="bx bx-x d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">Close</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- End Detail Modal -->
+        @include('pages.dashboard.barang_keluar.modal_tambah')
+        <!-- Tambah Modal -->
+        <!-- Ubah Modal -->
+        @include('pages.dashboard.barang_keluar.modal_edit')
+        <!-- Ubah Modal -->
 
     </section>
 </div>
 @endsection
 
 @push('addon-script')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
 <script src="/assets/static/js/pages/simple-datatables.js"></script>
+<script src="/assets/extensions/choices.js/public/assets/scripts/choices.js"></script>
+<script src="/assets/static/js/pages/form-element-select.js"></script>
+
+{{-- AJAX get-barang --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $('#barang_id').change(function () {
+        let barangId = $(this).val();
+
+        if (barangId) {
+            $.ajax({
+                url: '/get-barang/' + barangId,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $('#jenis_barang').val(data.jenis_material);
+                    $('#keterangan_barang').val(data.deskripsi_material);
+                },
+                error: function () {
+                    alert('Gagal mengambil data barang.');
+                }
+            });
+        }
+    });
+</script>
+{{-- end AJAX get-barang --}}
+
+{{-- Pop up success --}}
+@if (session('success'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: '{{ session('success') }}',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        });
+    </script>
+@endif
+{{-- end pop up success --}}
+
+{{-- Pop up error --}}
+@if (session('error'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal!',
+                text: '{{ session('error') }}',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        });
+    </script>
+@endif
+{{-- end pop up error --}}
+
+{{-- lempar data ke modal ubah --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const ubahFormModal = document.getElementById('ubahForm');
+
+        ubahFormModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+
+            // Ambil data dari button
+            const id = button.getAttribute('data-id');
+            const tanggal_pengambilan = button.getAttribute('data-tanggal_pengambilan');
+            const jenis_kebutuhan = button.getAttribute('data-jenis_kebutuhan');
+            const nama_engineer = button.getAttribute('data-nama_engineer');
+            const nama_mitra = button.getAttribute('data-nama_mitra');
+            const no_pa_ar = button.getAttribute('data-no_pa_ar');
+            const lokasi_pemasangan = button.getAttribute('data-lokasi_pemasangan');
+            const jumlah = button.getAttribute('data-jumlah');
+            const status_rsvp = button.getAttribute('data-status_rsvp');
+            const kode_rsvp = button.getAttribute('data-kode_rsvp');
+            const kode_gi = button.getAttribute('data-kode_gi');
+            const no_io = button.getAttribute('data-no_io');
+            const keterangan = button.getAttribute('data-keterangan');
+            const barang_id = button.getAttribute('data-barang_id');
+            const nama_barang = button.getAttribute('data-nama_barang');
+            const plant = button.getAttribute('data-plant');
+            const storage_location = button.getAttribute('data-storage_location');
+            const df_stor_loc_level = button.getAttribute('data-df_stor_loc_level');
+            const batch_real = button.getAttribute('data-batch_real');
+            const batch = button.getAttribute('data-batch');
+            const jenis_barang = button.getAttribute('data-jenis_barang');
+            const keterangan_barang = button.getAttribute('data-keterangan_barang');
+
+            // Isi input di modal
+            ubahFormModal.querySelector('#tanggal_pengambilan').value = tanggal_pengambilan;
+            ubahFormModal.querySelector('#jenis_kebutuhan').value = jenis_kebutuhan;
+            ubahFormModal.querySelector('#nama_engineer').value = nama_engineer;
+            ubahFormModal.querySelector('#nama_mitra').value = nama_mitra;
+            ubahFormModal.querySelector('#no_pa_ar').value = no_pa_ar;
+            ubahFormModal.querySelector('#lokasi_pemasangan').value = lokasi_pemasangan;
+            ubahFormModal.querySelector('#jumlah').value = jumlah;
+            ubahFormModal.querySelector('#status_rsvp').value = status_rsvp;
+            ubahFormModal.querySelector('#kode_rsvp').value = kode_rsvp;
+            ubahFormModal.querySelector('#kode_gi').value = kode_gi;
+            ubahFormModal.querySelector('#no_io').value = no_io;
+            ubahFormModal.querySelector('#keterangan').value = keterangan;
+            ubahFormModal.querySelector('#barang_id').value = barang_id;
+            ubahFormModal.querySelector('#nama_barang').value = nama_barang;
+            ubahFormModal.querySelector('#plant').value = plant;
+            ubahFormModal.querySelector('#storage_location').value = storage_location;
+            ubahFormModal.querySelector('#df_stor_loc_level').value = df_stor_loc_level;
+            ubahFormModal.querySelector('#batch_real').value = batch_real;
+            ubahFormModal.querySelector('#batch').value = batch;
+            ubahFormModal.querySelector('#jenis_barang').value = jenis_barang;
+            ubahFormModal.querySelector('#keterangan_barang').value = keterangan_barang;
+
+            // Set form action
+            ubahFormModal.querySelector('form').action = `/barang-keluar/${id}`;
+        });
+    });
+</script>
+
+{{-- end lempar data ke modal ubah --}}
+
+{{-- Pop up delete --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButtons = document.querySelectorAll('.delete-button');
+        const deleteForm = document.getElementById('deleteForm');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const itemId = this.getAttribute('data-id');
+
+                Swal.fire({
+                    title: 'Yakin ingin menghapus?',
+                    text: "Data akan hilang secara permanen!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        deleteForm.action = `/barang-keluar/${itemId}`; // Sesuaikan URL jika pakai prefix
+                        deleteForm.submit();
+                    }
+                });
+            });
+        });
+    });
+</script>
+{{-- end pop up delete --}}
+
 @endpush

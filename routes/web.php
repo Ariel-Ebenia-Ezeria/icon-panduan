@@ -34,6 +34,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/get-barang/{id}', [DashboardController::class, 'getBarang']);
     Route::resource('barang', BarangController::class);
     Route::resource('barang-keluar', BarangKeluarController::class);
     Route::resource('switch', SwitchController::class);

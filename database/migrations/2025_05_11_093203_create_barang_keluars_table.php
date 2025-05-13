@@ -15,11 +15,10 @@ return new class extends Migration
             $table->id();
             $table->date('tanggal_pengambilan');
             $table->string('jenis_kebutuhan');
-            $table->string('nama_enginneer');
+            $table->string('nama_engineer');
             $table->string('nama_mitra');
             $table->string('no_pa_ar');
             $table->string('lokasi_pemasangan');
-            $table->string('jenis_barang');
             $table->integer('jumlah');
             $table->string('status_rsvp');
             $table->integer('kode_rsvp');

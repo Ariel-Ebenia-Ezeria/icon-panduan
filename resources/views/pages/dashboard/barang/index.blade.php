@@ -37,6 +37,7 @@ Dashboard Data Barang
                             <th>Material Description</th>
                             <th>Stok</th>
                             <th>Satuan</th>
+                            <th>Perubahan</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -53,6 +54,9 @@ Dashboard Data Barang
                             <td>{{ $item->deskripsi_material }}</td>
                             <td>{{ $item->stok }}</td>
                             <td>{{ $item->satuan }}</td>
+                            <td>
+                                {{ \Carbon\Carbon::parse($item->updated_at)->translatedFormat('d F Y') }}
+                            </td>
                             <td>
                                 <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#ubahForm"
                                     data-id="{{ $item->id }}"
