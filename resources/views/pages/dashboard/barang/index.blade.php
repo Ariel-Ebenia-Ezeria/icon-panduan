@@ -120,6 +120,22 @@ Dashboard Data Barang
 @endif
 {{-- end pop up success --}}
 
+{{-- Pop up error --}}
+@if ($errors->any())
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal!',
+                html: `{!! implode('<br>', $errors->all()) !!}`,
+                timer: 2000,
+                showConfirmButton: false
+            });
+        });
+    </script>
+@endif
+{{-- end pop up error --}}
+
 {{-- lempar data ke modal ubah --}}
 <script>
     document.addEventListener('DOMContentLoaded', function () {

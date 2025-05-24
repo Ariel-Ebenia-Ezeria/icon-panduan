@@ -177,13 +177,13 @@ Dashboard Barang Keluar
 {{-- end pop up success --}}
 
 {{-- Pop up error --}}
-@if (session('error'))
+@if ($errors->any())
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             Swal.fire({
                 icon: 'error',
                 title: 'Gagal!',
-                text: '{{ session('error') }}',
+                html: `{!! implode('<br>', $errors->all()) !!}`,
                 timer: 2000,
                 showConfirmButton: false
             });

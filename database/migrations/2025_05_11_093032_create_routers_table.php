@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('logo');
             $table->string('username');
             $table->string('password');
-            $table->string('preconfig');
-            $table->string('command');
+            $table->text('preconfig');
+            $table->text('command');
             $table->timestamps();
         });
     }

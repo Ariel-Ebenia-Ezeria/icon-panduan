@@ -10,7 +10,7 @@ class BarangRequest extends FormRequest
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool 
+    public function authorize(): bool
     {
         return Auth::check();
     }
@@ -23,7 +23,7 @@ class BarangRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'kode_material' => 'required|string|max:50',
+            'kode_material' => 'required|unique:barangs,kode_material|string|max:50',
             'nama_material' => 'required|string|max:255',
             'jenis_material' => 'required|string|max:100',
             'deskripsi_material' => 'nullable|string|max:500',
@@ -36,6 +36,7 @@ class BarangRequest extends FormRequest
     {
         return [
             'kode_material.required' => 'Kode material harus diisi.',
+            'kode_material.unique' => 'Kode material sudah ada, silakan gunakan kode yang lain.',
             'kode_material.string' => 'Kode material harus berupa string.',
             'kode_material.max' => 'Kode material tidak boleh lebih dari 50 karakter.',
             'nama_material.required' => 'Nama material harus diisi.',

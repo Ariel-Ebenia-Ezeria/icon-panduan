@@ -90,6 +90,7 @@ class BarangKeluarController extends Controller
     {
         // dd($request->all());
         DB::transaction(function () use ($request, $id) {
+            $data = $request->all();
             $barangKeluar = BarangKeluar::findOrFail($id);
             $barang = Barang::findOrFail($request->barang_id);
 
@@ -106,11 +107,10 @@ class BarangKeluarController extends Controller
             $barang->stok -= $selisih; // bisa negatif (artinya stok ditambah)
             $barang->save();
 
+            $data['jumlah'] = $jumlahBaru;
+
             // Update data barang_keluar
-            $barangKeluar->update([
-                'barang_id' => $request->barang_id,
-                'jumlah' => $jumlahBaru,
-            ]);
+            $barangKeluar->update($data);
         });
 
         return redirect()->route('barang-keluar.index')->with('success', 'Data barang keluar berhasil diperbarui');
